@@ -1,0 +1,24 @@
+@import "../../../../assets/styles/variables.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem 1rem 1rem;
+  background: $linear-gradient;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  &__nav {
+    gap: 1rem;
+    display: flex;
+    cursor: pointer;
+    color: $light-grey-color;
+    justify-content: center;
+
+    &__help {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
