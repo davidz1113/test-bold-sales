@@ -1,0 +1,53 @@
+<div class="tooltip-container">
+  <button
+    class="tooltip-container__button-filter"
+    (click)="showTooltip(tooltipContainer)"
+  >
+    <p>Filtrar</p>
+    <i>
+      <img
+        src="assets/images/filter-icon.svg"
+        alt=""
+        height="16px"
+        width="16px"
+      />
+    </i>
+  </button>
+  <div class="tooltip-container__wrapper" #tooltipContainer>
+    <!-- [ngClass]="
+       showTooltip
+        ? 'tooltip-container__wrapper--show'
+        : 'tooltip-container__wrapper--hide'
+    " -->
+    <div class="tooltip-container__body">
+      <div class="tooltip-container__header">
+        <p class="w-100 text-align-center align-content-center">Filtrar</p>
+        <button
+          (click)="closeTooltip(tooltipContainer)"
+          class="tooltip-container__header__close"
+          aria-label="Cerrar"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="tooltip-container__checkbox">
+        <input type="checkbox" name="" id="paymentLink" />
+        <label for="paymentLink">Cobro con link de pago</label>
+      </div>
+      <div class="tooltip-container__checkbox">
+        <input type="checkbox" name="" id="paymentData" />
+        <label for="paymentData">Cobro con datáfono</label>
+      </div>
+      <div class="tooltip-container__checkbox">
+        <input type="checkbox" name="" id="all" />
+        <label for="all">Ver todos</label>
+      </div>
+      <button
+        class="tooltip-container__button-applied"
+        (click)="closeTooltip(tooltipContainer)"
+      >
+        Aplicar
+      </button>
+    </div>
+  </div>
+</div>

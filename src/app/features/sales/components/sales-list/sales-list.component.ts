@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-sales-list',
+  selector: 'bold-sales-list',
   standalone: true,
   imports: [],
   templateUrl: './sales-list.component.html',

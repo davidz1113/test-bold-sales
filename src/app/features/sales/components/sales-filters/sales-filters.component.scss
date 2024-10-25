@@ -1,0 +1,36 @@
+@import "../../../../../assets/styles/variables.scss";
+
+.sales-filter {
+  &__wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  &__button-container {
+    display: flex;
+    padding: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    gap: 1rem;
+  }
+
+  &__button {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: $secondary-font-size;
+
+    &--active {
+      background-color: $background-color;
+      border-radius: 1rem;
+      padding: 0.5rem;
+    }
+  }
+
+  &__checkbox-container{
+    
+  }
+
+}

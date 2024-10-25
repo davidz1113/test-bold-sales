@@ -1,0 +1,25 @@
+<div class="sales-filter__wrapper">
+  <div class="sales-filter__button-container">
+    <button
+      class="sales-filter__button"
+      [class.sales-filter__button--active]="buttonActiveIndex == 0"
+      (click)="buttonActiveIndex = 0"
+    >
+      Hoy</button
+    ><button
+      class="sales-filter__button"
+      [class.sales-filter__button--active]="buttonActiveIndex == 1"
+      (click)="buttonActiveIndex = 1"
+    >
+      Esta semana</button
+    ><button
+      class="sales-filter__button"
+      [class.sales-filter__button--active]="buttonActiveIndex == 2"
+      (click)="buttonActiveIndex = 2"
+    >
+      Octubre
+    </button>
+  </div>
+  <bold-tooltip></bold-tooltip>
+  <!-- <div class="sales-filter__checkbox-container">filtros</div> -->
+</div>

@@ -1,0 +1,17 @@
+@import "../../../assets/styles/mixin-responsive.scss";
+
+.home-sales {
+  &__wrapper {
+    display: flex;
+    gap: 1rem;
+
+    @include xs {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__card {
+    width: 100%;
+    max-width: 500px;
+  }
+}

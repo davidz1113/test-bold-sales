@@ -7,3 +7,15 @@ $background-color: #f6f4f9;
 $white-color: white;
 
 $linear-gradient: linear-gradient(100deg, $blue-color, $red-color);
+
+$primary-font-size: 1rem;
+$secondary-font-size: 0.75rem;
+
+$border-radius: 0.5rem;
+
+
+$breakpoint-xs: 480px; // Extra pequeño: teléfonos móviles
+$breakpoint-sm: 768px; // Pequeño: tabletas
+$breakpoint-md: 992px; // Mediano: laptops pequeñas
+$breakpoint-lg: 1200px; // Grande: desktops
+$breakpoint-xlg: 1440px; // Extra grande: pantallas grandes

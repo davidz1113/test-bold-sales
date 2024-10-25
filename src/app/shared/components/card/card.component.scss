@@ -1,0 +1,24 @@
+@import "../../../../assets/styles/variables.scss";
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+  background-color: $white-color;
+
+  &__header {
+    max-height: 3rem;
+    padding: 1rem;
+    background: $linear-gradient;
+    color: $white-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $secondary-font-size;
+  }
+}
