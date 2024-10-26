@@ -37,7 +37,6 @@
   }
 
   &__table {
-    // overflow-x: auto;
     width: 100%;
     border-collapse: collapse;
 
@@ -57,6 +56,29 @@
         gap: 1rem;
         p {
           align-self: center;
+        }
+      }
+
+      &__payment {
+        display: flex;
+        gap: 1rem;
+      }
+
+      &__mount {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+
+        &__span {
+          font-size: $secondary-font-size;
+          color: $dark-grey-color;
+          opacity: 0.5;
+
+          &--deduction {
+            font-size: $secondary-font-size;
+            color: $red-color;
+            opacity: 0.5;
+          }
         }
       }
     }

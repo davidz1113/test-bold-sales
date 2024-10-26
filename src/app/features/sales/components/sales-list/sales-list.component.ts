@@ -29,7 +29,7 @@ export class SalesListComponent {
     {
       id: 'GZEN38WQHWSVU',
       status: 'SUCCESSFUL',
-      paymentMethod: 'CARD',
+      paymentMethod: 'NEQUI',
       salesType: 'PAYMENT_LINK',
       createdAt: 1729875374143,
       transactionReference: 3136,

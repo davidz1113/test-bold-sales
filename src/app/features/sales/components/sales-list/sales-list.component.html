@@ -13,7 +13,7 @@
       type="text"
     />
   </div>
-  <div>
+  <div class="over-flow-auto">
     <table class="sales-list__table">
       <thead>
         <tr class="sales-list__table__row">
@@ -40,9 +40,35 @@
             </div>
           </td>
           <td>{{ sale.createdAt | date : "dd/MM/yyyy - hh:mm:ss" }}</td>
-          <td>**** {{ sale.transactionReference }}</td>
+          <td>
+            <div class="sales-list__table__row__payment">
+              <img
+                height="24px"
+                width="24px"
+                src="assets/images/png/{{
+                  sale.paymentMethod.toLowerCase()
+                }}.png"
+                alt=""
+              />
+              <span>**** {{ sale.transactionReference }}</span>
+            </div>
+          </td>
           <td>{{ sale.id }}</td>
-          <td>${{ sale.amount | customCurrency : "" : "" : "1.0-0" }}</td>
+          <td>
+            <div class="sales-list__table__row__mount">
+              <span>
+                $ {{ sale.amount | customCurrency : "" : "" : "1.0-0" }}
+              </span>
+              @if (sale.deduction) {
+              <span class="sales-list__table__row__mount__span"
+                >Deducción Bold</span
+              >
+              <span class="sales-list__table__row__mount__span--deduction">-$ {{
+                sale.deduction | customCurrency : "" : "" : "1.0-0"
+              }}</span>
+              }
+            </div>
+          </td>
         </tr>
         }
       </tbody>
