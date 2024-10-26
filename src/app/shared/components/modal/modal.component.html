@@ -1,6 +1,6 @@
-<div class="modal" [class.modal--show]="isVisible">
+<div class="modal" [class.modal--show]="isVisible"  >
   <div class="modal__wrapper">
-    <button class="modal__close" aria-label="Cerrar">&times;</button>
+    <button class="modal__close" aria-label="Cerrar" (click)="onCloseModal()">&times;</button>
     <ng-content></ng-content>
   </div>
 </div>

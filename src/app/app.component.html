@@ -4,7 +4,7 @@
     <router-outlet></router-outlet>
   </div>
 
-  <bold-modal>
+  <bold-modal [isVisible]="isModalVisible$ | async">
     <bold-sales-detail></bold-sales-detail>
   </bold-modal>
 </div>

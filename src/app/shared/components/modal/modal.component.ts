@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../features/sales/store/app.state';
+import { closeModal } from '../../../features/sales/store/actions/modal.action';
 
 @Component({
   selector: 'bold-modal',
@@ -9,4 +12,9 @@ import { Component, Input } from '@angular/core';
 })
 export class ModalComponent {
   @Input() isVisible: boolean | null = false;
+  private store: Store<AppState> = inject(Store);
+
+  onCloseModal() {
+    this.store.dispatch(closeModal());
+  }
 }

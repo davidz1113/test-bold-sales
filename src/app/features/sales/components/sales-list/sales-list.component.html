@@ -30,7 +30,7 @@
       </thead>
       <tbody>
         @for (sale of sales$ | async; track $index) {
-        <tr class="sales-list__table__row">
+        <tr class="sales-list__table__row" (click)="onViewDetail(sale)">
           <td>
             <div class="sales-list__table__row__transaction">
               <bold-icon

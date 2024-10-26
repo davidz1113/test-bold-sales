@@ -1,7 +1,9 @@
 @import "../../../../assets/styles/variables.scss";
+@import "../../../../assets/styles/mixin-responsive.scss";
 
 .modal {
-  display: none; /* Oculto por defecto */
+  visibility: hidden;
+  opacity: 0;
   position: fixed; /* Fijo en la pantalla */
   z-index: 999; /* Por encima de otros elementos */
   left: 0;
@@ -10,9 +12,12 @@
   height: 100%; /* Alto completo */
   overflow: auto; /* Habilita el scroll si es necesario */
   background-color: rgba(75, 75, 75, 0.77); /* Fondo con opacidad */
+  transition: opacity 0.3s;
 
   &--show {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    animation: slideIn 0.5s forwards;
   }
 
   &__wrapper {
@@ -24,6 +29,18 @@
     width: 30%;
     display: flex;
     flex-direction: column;
+
+    @include xs {
+      width: 100%;
+      padding: 0;
+      right: none;
+    }
+
+    @include sm {
+      right: none;
+      padding: 0;
+      width: 100%;
+    }
   }
 
   &__close {
@@ -32,5 +49,14 @@
     background: none;
     border: none;
     font-size: 1.5rem;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0;
   }
 }

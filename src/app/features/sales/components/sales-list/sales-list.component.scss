@@ -73,6 +73,7 @@
           font-size: $secondary-font-size;
           color: $dark-grey-color;
           opacity: 0.5;
+          min-width: 100px;
 
           &--deduction {
             font-size: $secondary-font-size;

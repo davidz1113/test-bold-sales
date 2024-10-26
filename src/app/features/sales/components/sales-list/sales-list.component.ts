@@ -18,6 +18,7 @@ import {
   selectSales,
 } from '../../store/selectors/sale.selector';
 import { setSearchValue } from '../../store/actions/sale.action';
+import { openModal } from '../../store/actions/modal.action';
 
 @Component({
   selector: 'bold-sales-list',
@@ -71,7 +72,6 @@ export class SalesListComponent implements OnInit {
     effect(
       () => {
         const searchValue = this.searchInputValue();
-        console.log('searchInputValue', searchValue);
         this.store.dispatch(setSearchValue({ searchValue }));
       },
       {
@@ -88,5 +88,9 @@ export class SalesListComponent implements OnInit {
   onInputChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchInputValue.set(target.value);
+  }
+
+  onViewDetail(sale: ISale): void {
+    this.store.dispatch(openModal({ data: sale }));
   }
 }
