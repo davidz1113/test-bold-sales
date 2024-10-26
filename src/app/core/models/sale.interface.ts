@@ -6,6 +6,7 @@ export interface ISale {
     createdAt: number;
     transactionReference: number;
     amount: number;
+    statusLabel?: string;
     deduction?: number;
     franchise?: string;
 }

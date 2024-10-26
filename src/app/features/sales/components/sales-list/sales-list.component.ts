@@ -1,7 +1,13 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ISale } from '../../../../core/models/sale.interface';
 import { AsyncPipe, CurrencyPipe, DatePipe } from '@angular/common';
-import { TransactionEnum } from '../../../../core/models/transaction.enum';
 import { CustomCurrencyPipe } from '../../../../shared/pipes/custom-currency.pipe';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
 import { Observable } from 'rxjs';
@@ -11,6 +17,7 @@ import {
   selectLabelFrecuency,
   selectSales,
 } from '../../store/selectors/sale.selector';
+import { setSearchValue } from '../../store/actions/sale.action';
 
 @Component({
   selector: 'bold-sales-list',
@@ -20,8 +27,6 @@ import {
   styleUrl: './sales-list.component.scss',
 })
 export class SalesListComponent implements OnInit {
-  transactionEnum = TransactionEnum;
-
   sales: ISale[] = [
     {
       id: 'GZEN2KAGAPJND',
@@ -60,14 +65,28 @@ export class SalesListComponent implements OnInit {
     string | undefined
   >();
 
-  constructor() {}
+  searchInputValue = signal<string>('');
+
+  constructor() {
+    effect(
+      () => {
+        const searchValue = this.searchInputValue();
+        console.log('searchInputValue', searchValue);
+        this.store.dispatch(setSearchValue({ searchValue }));
+      },
+      {
+        allowSignalWrites: true,
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.sales$ = this.store.select(selectSales);
     this.labelFrecuency$ = this.store.select(selectLabelFrecuency);
   }
 
-  getTransactionStatus(status: string): string {
-    return this.transactionEnum[status as keyof typeof TransactionEnum];
+  onInputChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.searchInputValue.set(target.value);
   }
 }

@@ -1,6 +1,6 @@
 <div class="sales-detail__wrapper">
   <bold-icon [name]="sale.status" [height]="32" [width]="32" />
-  <p class="sales-detail__title">¡{{ getTransactionStatus(sale.status) }}!</p>
+  <p class="sales-detail__title">¡{{ sale.statusLabel }}!</p>
   <p class="sales-detail__amount">
     $ {{ sale.amount | customCurrency : "" : "" : "1.0-0" }}
   </p>

@@ -13,3 +13,8 @@ export const setFilterDate = createAction(
   '[Sale] Set Filter Date',
   props<{ filterDate: FilterDate }>()
 );
+
+export const setSearchValue = createAction(
+  '[Sale] Set Search Value',
+  props<{ searchValue: string }>()
+);

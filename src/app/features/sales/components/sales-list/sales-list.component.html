@@ -13,6 +13,8 @@
       placeholder="Buscar"
       class="sales-list__filter__search"
       type="text"
+      [value]="searchInputValue()"
+      (input)="onInputChange($event)"
     />
   </div>
   <div class="over-flow-auto">
@@ -37,7 +39,7 @@
                 [name]="sale.salesType"
               ></bold-icon>
               <p>
-                {{ getTransactionStatus(sale.status) }}
+                {{ sale.statusLabel }}
               </p>
             </div>
           </td>

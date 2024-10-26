@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
 import { ISale } from '../../../../core/models/sale.interface';
-import { TransactionEnum } from '../../../../core/models/transaction.enum';
-import { CustomCurrencyPipe } from "../../../../shared/pipes/custom-currency.pipe";
+import { CustomCurrencyPipe } from '../../../../shared/pipes/custom-currency.pipe';
 import { DatePipe } from '@angular/common';
-import { SaleTypeEnum } from '../../../../core/models/saleType.enum';
+import {
+  getSalesByType,
+  getTransactionByStatus,
+} from '../../../../shared/utils/utils.utils';
 
 @Component({
   selector: 'bold-sales-detail',
@@ -14,9 +16,6 @@ import { SaleTypeEnum } from '../../../../core/models/saleType.enum';
   styleUrl: './sales-detail.component.scss',
 })
 export class SalesDetailComponent {
-  transactionEnum = TransactionEnum;
-  saleTypeEnum = SaleTypeEnum;
-
   sale: ISale = {
     id: 'GZEN99SSVBJVS',
     status: 'REJECTED',
@@ -28,12 +27,7 @@ export class SalesDetailComponent {
     deduction: 15968,
   };
 
-  getTransactionStatus(status: string): string {
-    return this.transactionEnum[status as keyof typeof TransactionEnum];
-  }
-
   getSaleType(saleType: string): string {
-    return this.saleTypeEnum[saleType as keyof typeof SaleTypeEnum];
+    return getSalesByType(saleType);
   }
-
 }
