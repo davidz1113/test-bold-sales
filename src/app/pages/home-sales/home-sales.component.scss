@@ -1,4 +1,5 @@
 @import "../../../assets/styles/mixin-responsive.scss";
+@import "../../../assets/styles/variables.scss";
 
 .home-sales {
   &__container {
@@ -19,5 +20,21 @@
   &__card {
     width: 100%;
     max-width: 500px;
+
+    &__wrapper {
+      display: flex;
+      padding: 1rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    &__amount {
+      background: $linear-gradient;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-clip: text;
+      font-weight: 600;
+    }
   }
 }

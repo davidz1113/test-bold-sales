@@ -1,5 +1,7 @@
 <div class="sales-list__wrapper">
-  <div class="sales-list__header"><p>Header</p></div>
+  <div class="sales-list__header">
+    <p>Tus ventas de {{ labelFrecuency$ | async }}</p>
+  </div>
   <div class="sales-list__filter">
     <img
       src="assets/images/search-icon.svg"
@@ -25,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (sale of sales; track $index) {
+        @for (sale of sales$ | async; track $index) {
         <tr class="sales-list__table__row">
           <td>
             <div class="sales-list__table__row__transaction">
@@ -63,9 +65,10 @@
               <span class="sales-list__table__row__mount__span"
                 >Deducción Bold</span
               >
-              <span class="sales-list__table__row__mount__span--deduction">-$ {{
-                sale.deduction | customCurrency : "" : "" : "1.0-0"
-              }}</span>
+              <span class="sales-list__table__row__mount__span--deduction"
+                >-$
+                {{ sale.deduction | customCurrency : "" : "" : "1.0-0" }}</span
+              >
               }
             </div>
           </td>

@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ISale } from '../../../../core/models/sale.interface';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe, DatePipe } from '@angular/common';
 import { TransactionEnum } from '../../../../core/models/transaction.enum';
 import { CustomCurrencyPipe } from '../../../../shared/pipes/custom-currency.pipe';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.state';
+import {
+  selectLabelFrecuency,
+  selectSales,
+} from '../../store/selectors/sale.selector';
 
 @Component({
   selector: 'bold-sales-list',
   standalone: true,
-  imports: [DatePipe, CustomCurrencyPipe, IconComponent],
+  imports: [DatePipe, AsyncPipe, CustomCurrencyPipe, IconComponent],
   templateUrl: './sales-list.component.html',
   styleUrl: './sales-list.component.scss',
 })
-export class SalesListComponent {
+export class SalesListComponent implements OnInit {
   transactionEnum = TransactionEnum;
 
   sales: ISale[] = [
@@ -47,7 +54,18 @@ export class SalesListComponent {
     },
   ];
 
+  private store: Store<AppState> = inject(Store);
+  sales$: Observable<readonly ISale[]> = new Observable<readonly ISale[]>();
+  labelFrecuency$: Observable<string | undefined> = new Observable<
+    string | undefined
+  >();
+
   constructor() {}
+
+  ngOnInit(): void {
+    this.sales$ = this.store.select(selectSales);
+    this.labelFrecuency$ = this.store.select(selectLabelFrecuency);
+  }
 
   getTransactionStatus(status: string): string {
     return this.transactionEnum[status as keyof typeof TransactionEnum];

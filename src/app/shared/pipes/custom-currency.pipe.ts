@@ -11,7 +11,7 @@ export class CustomCurrencyPipe implements PipeTransform {
   constructor() {}
 
   transform(
-    value: number,
+    value: number | null,
     currencyCode: string = '',
     display: string | boolean = 'symbol',
     digitsInfo: string = '1.0-0',

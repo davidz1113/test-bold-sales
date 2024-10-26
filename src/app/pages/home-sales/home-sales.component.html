@@ -1,8 +1,13 @@
 <div class="home-sales__container">
   <section class="home-sales__wrapper">
     <div class="home-sales__card">
-      <bold-card>
-        <div [style.padding]="'1rem'">$1787.04510.154</div>
+      <bold-card [title]="'Total de ventas de ' + (labelFrecuency$ | async)">
+        <div class="home-sales__card__wrapper">
+          <p class="home-sales__card__amount">
+            $ {{ totalAmount$ | async | customCurrency : "" : "" : "1.0-0" }}
+          </p>
+          <p>{{ labelFrecuencyDate$ | async }}</p>
+        </div>
       </bold-card>
     </div>
     <div class="w-100">

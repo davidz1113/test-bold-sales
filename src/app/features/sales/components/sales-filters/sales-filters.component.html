@@ -3,21 +3,21 @@
     <button
       class="sales-filter__button"
       [class.sales-filter__button--active]="buttonActiveIndex == 0"
-      (click)="buttonActiveIndex = 0"
+      (click)="changeFilterDate(0)"
     >
       Hoy</button
     ><button
       class="sales-filter__button"
       [class.sales-filter__button--active]="buttonActiveIndex == 1"
-      (click)="buttonActiveIndex = 1"
+      (click)="changeFilterDate(1)"
     >
       Esta semana</button
     ><button
       class="sales-filter__button"
       [class.sales-filter__button--active]="buttonActiveIndex == 2"
-      (click)="buttonActiveIndex = 2"
+      (click)="changeFilterDate(2)"
     >
-      Octubre
+      {{ getCurrentMonth }}
     </button>
   </div>
   <bold-tooltip></bold-tooltip>
