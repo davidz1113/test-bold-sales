@@ -1,0 +1,83 @@
+@import "../../../../../assets/styles/variables.scss";
+
+.sales-list {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    background: $linear-gradient;
+    padding: 1rem;
+    color: $white-color;
+    border-radius: $border-radius $border-radius 0 0;
+
+    p {
+      font-size: $secondary-font-size;
+    }
+  }
+
+  &__filter {
+    padding: 1rem;
+    gap: 1rem;
+    display: flex;
+    border-right: 1px solid $light-grey-secondary-color;
+    border-left: 1px solid $light-grey-secondary-color;
+
+    &__search {
+      width: 100%;
+      border: none;
+      background: none;
+      font-size: $primary-font-size;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__table {
+    // overflow-x: auto;
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      font-size: $primary-font-size;
+      font-weight: lighter;
+      text-align: start;
+    }
+
+    &__row {
+      cursor: pointer;
+      border: 2px solid $light-grey-secondary-color;
+
+      &__transaction {
+        display: flex;
+        gap: 1rem;
+        p {
+          align-self: center;
+        }
+      }
+    }
+
+    tr {
+      &:nth-of-type(odd) td:first-child {
+        border-left: 2px solid $blue-color;
+      }
+    }
+
+    th {
+      padding: 0.5rem 1rem;
+    }
+
+    td {
+      color: $blue-color;
+      padding: 1rem 1rem;
+    }
+
+    table {
+      width: 100%;
+    }
+  }
+}

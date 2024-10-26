@@ -1,0 +1,36 @@
+@import "../../../../assets/styles/variables.scss";
+
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijo en la pantalla */
+  z-index: 999; /* Por encima de otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Alto completo */
+  overflow: auto; /* Habilita el scroll si es necesario */
+  background-color: rgba(75, 75, 75, 0.77); /* Fondo con opacidad */
+
+  &--show {
+    display: block;
+  }
+
+  &__wrapper {
+    background-color: $white-color;
+    right: 0;
+    position: fixed;
+    padding: 20px;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__close {
+    cursor: pointer;
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+  }
+}

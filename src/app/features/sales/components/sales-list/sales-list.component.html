@@ -1,1 +1,51 @@
-<p>sales-list works!</p>
+<div class="sales-list__wrapper">
+  <div class="sales-list__header"><p>Header</p></div>
+  <div class="sales-list__filter">
+    <img
+      src="assets/images/search-icon.svg"
+      alt="search-icon"
+      height="16px"
+      width="16px"
+    />
+    <input
+      placeholder="Buscar"
+      class="sales-list__filter__search"
+      type="text"
+    />
+  </div>
+  <div>
+    <table class="sales-list__table">
+      <thead>
+        <tr class="sales-list__table__row">
+          <th>Transacción</th>
+          <th>Fecha y Hora</th>
+          <th>Método de Pago</th>
+          <th>ID Transacción</th>
+          <th>Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (sale of sales; track $index) {
+        <tr class="sales-list__table__row">
+          <td>
+            <div class="sales-list__table__row__transaction">
+              <bold-icon
+                [height]="24"
+                [width]="24"
+                [name]="sale.salesType"
+              ></bold-icon>
+              <p>
+                {{ getTransactionStatus(sale.status) }}
+              </p>
+            </div>
+          </td>
+          <td>{{ sale.createdAt | date : "dd/MM/yyyy - hh:mm:ss" }}</td>
+          <td>**** {{ sale.transactionReference }}</td>
+          <td>{{ sale.id }}</td>
+          <td>${{ sale.amount | customCurrency : "" : "" : "1.0-0" }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

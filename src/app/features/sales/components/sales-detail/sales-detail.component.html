@@ -1,0 +1,56 @@
+<div class="sales-detail__wrapper">
+  <bold-icon [name]="sale.status" [height]="32" [width]="32" />
+  <p class="sales-detail__title">¡{{ getTransactionStatus(sale.status) }}!</p>
+  <p class="sales-detail__amount">
+    $ {{ sale.amount | customCurrency : "" : "" : "1.0-0" }}
+  </p>
+  <span class="sales-detail__date">{{
+    sale.createdAt | date : "dd/MM/yyyy - hh:mm:ss"
+  }}</span>
+
+  <div class="sales-detail__info-wraper">
+    <div class="sales-detail__info">
+      <p class="sales-detail__info__title">ID transacción Bold</p>
+      <p class="sales-detail__info__value text-bold">{{ sale.id }}</p>
+    </div>
+    <div class="sales-detail__info">
+      <p class="sales-detail__info__title">Deducción Bold</p>
+      <p
+        class="sales-detail__info__value"
+        [class.sales-detail__info--deduction]="sale.deduction"
+      >
+        {{
+          sale.deduction
+            ? "-$ " + (sale.deduction | customCurrency : "" : "" : "1.0-0")
+            : "$ 0"
+        }}
+      </p>
+    </div>
+    <hr />
+    <div class="sales-detail__info">
+      <p class="sales-detail__info__title">Método de pago</p>
+      <div class="sales-detail__info__payment">
+        <img
+          src="assets/images/png/{{ sale.paymentMethod.toLowerCase() }}.png"
+          alt=""
+        />
+        <p class="sales-detail__info__value">
+          **** {{ sale.transactionReference }}
+        </p>
+      </div>
+    </div>
+    <div class="sales-detail__info">
+      <p class="sales-detail__info__title">Tipo de pago</p>
+      <div class="sales-detail__info__sale-type">
+        <bold-icon
+          [height]="24"
+          [width]="24"
+          [name]="sale.salesType"
+        ></bold-icon>
+        <p class="sales-detail__info__value text-bold">
+          {{ getSaleType(sale.salesType) }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
