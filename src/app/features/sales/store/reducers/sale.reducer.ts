@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import {
   FilterDate,
+  FilterSalesType,
   FrecuencyDate,
   SaleState,
 } from '../../../../core/models/sale.state';
@@ -8,6 +9,7 @@ import {
   loadSales,
   loadSalesSuccess,
   setFilterDate,
+  setFilterSalesType,
   setSearchValue,
 } from '../actions/sale.action';
 import { ISale } from '../../../../core/models/sale.interface';
@@ -15,6 +17,7 @@ import {
   calculateFrecuencyLabel,
   getWeekDates,
 } from '../../../../shared/utils/dates.utils';
+import { SaleTypeEnum } from '../../../../core/models/saleType.enum';
 
 export const initialState: SaleState = {
   sales: [],
@@ -25,6 +28,11 @@ export const initialState: SaleState = {
     date: FrecuencyDate.TODAY,
     textLabel: 'hoy',
     frecuencyLabel: calculateFrecuencyLabel(FrecuencyDate.TODAY),
+  },
+  filterSalesType: {
+    paymentLink: false,
+    paymentTerminal: false,
+    viewAll: true,
   },
 };
 
@@ -38,7 +46,12 @@ export const saleReducer = createReducer(
   on(loadSalesSuccess, (state, { sales }) => ({
     ...state,
     sales,
-    salesFiltered: filterSales(sales, state.filterDate, state.filter),
+    salesFiltered: filterSales(
+      sales,
+      state.filterDate,
+      state.filter,
+      state.filterSalesType
+    ),
     loading: false,
   })),
   on(setFilterDate, (state, { filterDate }) => ({
@@ -47,19 +60,40 @@ export const saleReducer = createReducer(
       ...filterDate,
       frecuencyLabel: calculateFrecuencyLabel(filterDate.date),
     },
-    salesFiltered: filterSales(state.sales, filterDate, state.filter),
+    salesFiltered: filterSales(
+      state.sales,
+      filterDate,
+      state.filter,
+      state.filterSalesType
+    ),
   })),
   on(setSearchValue, (state, { searchValue }) => ({
     ...state,
     filter: searchValue,
-    salesFiltered: filterSales(state.sales, state.filterDate, searchValue),
+    salesFiltered: filterSales(
+      state.sales,
+      state.filterDate,
+      searchValue,
+      state.filterSalesType
+    ),
+  })),
+  on(setFilterSalesType, (state, { filterSalesType }) => ({
+    ...state,
+    filterSalesType,
+    salesFiltered: filterSales(
+      state.sales,
+      state.filterDate,
+      state.filter,
+      filterSalesType
+    ),
   }))
 );
 
 const filterSales = (
   originalSales: ReadonlyArray<ISale>,
   filterDate: FilterDate,
-  filter: string
+  filter: string,
+  filterSalesType: FilterSalesType
 ): ISale[] => {
   let newSales = originalSales.slice();
 
@@ -94,6 +128,21 @@ const filterSales = (
       });
     });
   }
+  console.log('filterSalesType', filterSalesType);
+
+  newSales = newSales.filter((sale) => {
+    if (filterSalesType.viewAll) {
+      return true;
+    }
+    if (filterSalesType.paymentLink && filterSalesType.paymentTerminal) {
+      return sale.salesType === 'PAYMENT_LINK' || sale.salesType === 'TERMINAL';
+    } else if (filterSalesType.paymentLink) {
+      return sale.salesType === 'PAYMENT_LINK';
+    } else if (filterSalesType.paymentTerminal) {
+      return sale.salesType === 'TERMINAL';
+    }
+    return true;
+  });
 
   return newSales;
 };

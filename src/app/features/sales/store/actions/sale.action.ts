@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ISale } from '../../../../core/models/sale.interface';
-import { FilterDate } from '../../../../core/models/sale.state';
+import { FilterDate, FilterSalesType } from '../../../../core/models/sale.state';
 
 export const loadSales = createAction('[Sale] Load Sales');
 
@@ -17,4 +17,9 @@ export const setFilterDate = createAction(
 export const setSearchValue = createAction(
   '[Sale] Set Search Value',
   props<{ searchValue: string }>()
+);
+
+export const setFilterSalesType = createAction(
+  '[Sale] Set Filter Sales Type',
+  props<{ filterSalesType: FilterSalesType }>()
 );

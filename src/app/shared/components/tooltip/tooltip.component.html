@@ -4,14 +4,7 @@
     (click)="showTooltip(tooltipContainer)"
   >
     <p>Filtrar</p>
-    <i>
-      <img
-        src="assets/images/filter-icon.svg"
-        alt=""
-        height="16px"
-        width="16px"
-      />
-    </i>
+    <bold-icon name="FILTER" [height]="16" [width]="16"></bold-icon>
   </button>
   <div class="tooltip-container__wrapper" #tooltipContainer>
     <!-- [ngClass]="
@@ -30,24 +23,40 @@
           &times;
         </button>
       </div>
-      <div class="tooltip-container__checkbox">
-        <input type="checkbox" name="" id="paymentLink" />
-        <label for="paymentLink">Cobro con link de pago</label>
-      </div>
-      <div class="tooltip-container__checkbox">
-        <input type="checkbox" name="" id="paymentData" />
-        <label for="paymentData">Cobro con datáfono</label>
-      </div>
-      <div class="tooltip-container__checkbox">
-        <input type="checkbox" name="" id="all" />
-        <label for="all">Ver todos</label>
-      </div>
-      <button
-        class="tooltip-container__button-applied"
-        (click)="closeTooltip(tooltipContainer)"
+      <form
+        [formGroup]="checkBoxForm"
+        class="tooltip-container__checkbox__wrapper"
       >
-        Aplicar
-      </button>
+        <div class="tooltip-container__checkbox">
+          <input
+            formControlName="paymentLink"
+            type="checkbox"
+            name=""
+            id="paymentLink"
+          />
+          <label for="paymentLink">Cobro con link de pago</label>
+        </div>
+        <div class="tooltip-container__checkbox">
+          <input
+            formControlName="paymentTerminal"
+            type="checkbox"
+            name=""
+            id="paymentTerminal"
+          />
+          <label for="paymentTerminal">Cobro con datáfono</label>
+        </div>
+        <div class="tooltip-container__checkbox">
+          <input type="checkbox" name="" id="all" formControlName="viewAll" />
+          <label for="all">Ver todos</label>
+        </div>
+        <button
+          type="button"
+          class="tooltip-container__button-applied"
+          (click)="onAppliedFilters(tooltipContainer)"
+        >
+          Aplicar
+        </button>
+      </form>
     </div>
   </div>
 </div>

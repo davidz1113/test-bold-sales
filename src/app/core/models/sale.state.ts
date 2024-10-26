@@ -4,6 +4,7 @@ export interface SaleState {
   loading: boolean;
   filter: string;
   filterDate: FilterDate;
+  filterSalesType: FilterSalesType;
   sales: ReadonlyArray<ISale>;
   salesFiltered: ISale[];
 }
@@ -12,6 +13,12 @@ export interface FilterDate {
   date: FrecuencyDate;
   textLabel?: string;
   frecuencyLabel?: string;
+}
+
+export interface FilterSalesType {
+  paymentLink: boolean;
+  paymentTerminal: boolean;
+  viewAll: boolean;
 }
 
 export enum FrecuencyDate {

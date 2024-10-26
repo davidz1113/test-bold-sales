@@ -4,4 +4,5 @@ export enum IconValues {
   HELPCIRCLE = 'help-circle',
   REJECTED = 'error',
   SUCCESSFUL = 'success',
+  FILTER = 'filter',
 }
