@@ -5,4 +5,11 @@ export enum IconValues {
   REJECTED = 'error',
   SUCCESSFUL = 'success',
   FILTER = 'filter',
+  SEARCH = 'search',
+  BANCOLOMBIA = 'bancolombia',
+  NEQUI = 'nequi',
+  CARD = 'card',
+  DAVIPLATA = 'daviplata',
+  PSE = 'pse',
+  VISA = 'visa',
 }

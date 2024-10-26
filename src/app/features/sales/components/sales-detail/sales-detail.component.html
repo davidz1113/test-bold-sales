@@ -30,10 +30,7 @@
     <div class="sales-detail__info">
       <p class="sales-detail__info__title">Método de pago</p>
       <div class="sales-detail__info__payment">
-        <img
-          src="assets/images/png/{{ sale.paymentMethod.toLowerCase() }}.png"
-          alt=""
-        />
+        <bold-icon [name]="sale.paymentMethod" [height]="32" [width]="32" />
         <p class="sales-detail__info__value">
           **** {{ sale.transactionReference }}
         </p>

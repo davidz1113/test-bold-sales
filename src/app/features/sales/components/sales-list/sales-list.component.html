@@ -46,13 +46,18 @@
           <td>{{ sale.createdAt | date : "dd/MM/yyyy - hh:mm:ss" }}</td>
           <td>
             <div class="sales-list__table__row__payment">
-              <img
+              <!-- <img
                 height="24px"
                 width="24px"
                 src="assets/images/png/{{
                   sale.paymentMethod.toLowerCase()
                 }}.png"
                 alt=""
+              /> -->
+              <bold-icon
+                [height]="24"
+                [width]="24"
+                [name]="sale.paymentMethod"
               />
               <span>**** {{ sale.transactionReference }}</span>
             </div>
