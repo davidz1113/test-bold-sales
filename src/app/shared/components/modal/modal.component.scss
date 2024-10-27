@@ -26,20 +26,21 @@
     position: fixed;
     padding: 20px;
     height: 100%;
-    width: 30%;
+    width: 40%;
+    max-width: 720px;
     display: flex;
     flex-direction: column;
+    border-radius: 1rem 0rem;
 
     @include xs {
       width: 100%;
       padding: 0;
       right: none;
+      border-radius: 0rem;
     }
 
     @include sm {
-      right: none;
-      padding: 0;
-      width: 100%;
+      width: 70%;
     }
   }
 
