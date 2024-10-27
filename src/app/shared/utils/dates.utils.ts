@@ -41,10 +41,15 @@ const formatDateToLongString = (date: Date): string => {
 export const getWeekDates = (date: Date) => {
   const dayOfWeek = date.getDay(); // 0 (Domingo) a 6 (Sábado)
   const startDate = new Date(date);
-  startDate.setDate(date.getDate() - dayOfWeek + 1); // Moverse al Lunes
+
+  if (dayOfWeek === 0) {
+    startDate.setDate(date.getDate() - dayOfWeek - 6); // Moverse al Lunes de la semana pasada
+  } else {
+    startDate.setDate(date.getDate() - dayOfWeek + 1); // Moverse al Lunes de la semana actual
+  }
 
   const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 5); // Moverse al Sábado
+  endDate.setDate(startDate.getDate() + 6); // Moverse al domingo de la semana actual
 
   return {
     startDate: startDate.getTime(),

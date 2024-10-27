@@ -56,7 +56,7 @@ export class SalesFiltersComponent implements OnInit {
 
   get getCurrentMonth(): string {
     const date = new Date();
-    const month = date.toLocaleString('default', { month: 'long' });
+    const month = date.toLocaleString('es-ES', { month: 'long' });
     return month.charAt(0).toUpperCase() + month.slice(1);
   }
 }
