@@ -9,7 +9,7 @@ import { getTransactionByStatus } from '../../shared/utils/utils.utils';
 })
 export class SalesService {
   private http: HttpClient = inject(HttpClient);
-  private url: string = ' https://bold-fe-api.vercel.app/api';
+  private url: string = 'https://bold-fe-api.vercel.app/api';
 
   constructor() {}
 
