@@ -17,7 +17,10 @@ import {
   selectLabelFrecuency,
   selectSales,
 } from '../../store/selectors/sale.selector';
-import { setSearchValue } from '../../store/actions/sale.action';
+import {
+  setOrderByAmount,
+  setSearchValue,
+} from '../../store/actions/sale.action';
 import { openModal } from '../../store/actions/modal.action';
 
 @Component({
@@ -67,12 +70,17 @@ export class SalesListComponent implements OnInit {
   >();
 
   searchInputValue = signal<string>('');
+  isOrderAsc: boolean = true;
+  isOrderAsc$: Observable<boolean> = new Observable<boolean>();
 
   constructor() {}
 
   ngOnInit(): void {
     this.sales$ = this.store.select(selectSales);
     this.labelFrecuency$ = this.store.select(selectLabelFrecuency);
+    this.isOrderAsc$ = this.store.select(
+      (state: AppState) => state.sales.isOrderByAmountAsc
+    );
 
     this.store
       .select((state: AppState) => state.sales)
@@ -90,5 +98,12 @@ export class SalesListComponent implements OnInit {
 
   onViewDetail(sale: ISale): void {
     this.store.dispatch(openModal({ data: sale }));
+  }
+
+  onSortByMount(): void {
+    this.isOrderAsc = !this.isOrderAsc;
+    this.store.dispatch(
+      setOrderByAmount({ isOrderByAmountAsc: this.isOrderAsc })
+    );
   }
 }

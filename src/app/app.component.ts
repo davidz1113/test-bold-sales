@@ -49,5 +49,9 @@ export class AppComponent implements OnInit {
     if (isEmptyValueFromLocalStorage('searchValue')) {
       localStorage.setItem('searchValue', JSON.stringify(''));
     }
+
+    if (isEmptyValueFromLocalStorage('isOrderByAmountAsc') == null) {
+      localStorage.setItem('isOrderByAmountAsc', JSON.stringify(true));
+    }
   }
 }
