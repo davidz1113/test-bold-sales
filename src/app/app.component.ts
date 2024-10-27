@@ -26,7 +26,6 @@ import { isEmptyValueFromLocalStorage } from './shared/utils/utils.utils';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'angular-bold-test';
 
   private store: Store<AppState> = inject(Store);
   isModalVisible$: Observable<boolean> = new Observable<boolean>();

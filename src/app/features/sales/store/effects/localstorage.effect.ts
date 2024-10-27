@@ -44,28 +44,6 @@ export class LocalStorageEffect {
           if (key) {
             localStorage.setItem(key, JSON.stringify(action[key]));
           }
-
-          // if (action.type === setFilterDate.type) {
-          //   localStorage.setItem(
-          //     'filterDate',
-          //     JSON.stringify(action.filterDate)
-          //   );
-          // } else if (action.type === setFilterSalesType.type) {
-          //   localStorage.setItem(
-          //     'filterSalesType',
-          //     JSON.stringify(action.filterSalesType)
-          //   );
-          // } else if (action.type === setSearchValue.type) {
-          //   localStorage.setItem(
-          //     'searchValue',
-          //     JSON.stringify(action.searchValue)
-          //   );
-          // } else if (action.type === setOrderByAmount.type) {
-          //   localStorage.setItem(
-          //     'isOrderByAmountAsc',
-          //     JSON.stringify(action.isOrderByAmountAsc)
-          //   );
-          // }
         })
       ),
     { dispatch: false }
@@ -96,8 +74,6 @@ export class LocalStorageEffect {
           } catch (error) {
             searchValue = '';
           }
-
-          console.log('filterDate', filterDate);
 
           return [
             setFilterDate({ filterDate }),

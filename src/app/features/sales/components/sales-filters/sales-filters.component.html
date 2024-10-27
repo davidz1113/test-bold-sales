@@ -1,6 +1,15 @@
 <div class="sales-filter__wrapper">
   <div class="sales-filter__button-container">
+    @for (label of labelDatesFrecuency; track $index) {
     <button
+      class="sales-filter__button"
+      [class.sales-filter__button--active]="buttonActiveIndex == $index"
+      (click)="changeFilterDate($index)"
+    >
+      {{ label }}
+    </button>
+    }
+    <!-- <button
       class="sales-filter__button"
       [class.sales-filter__button--active]="buttonActiveIndex == 0"
       (click)="changeFilterDate(0)"
@@ -18,7 +27,7 @@
       (click)="changeFilterDate(2)"
     >
       {{ getCurrentMonth }}
-    </button>
+    </button> -->
   </div>
   <bold-tooltip></bold-tooltip>
 </div>
