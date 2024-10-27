@@ -8,3 +8,9 @@ export const getTransactionByStatus = (transactionStatus: string): string => {
 export const getSalesByType = (saleType: string): string => {
   return SaleTypeEnum[saleType as keyof typeof SaleTypeEnum];
 };
+
+export const isEmptyValueFromLocalStorage = (key: string): boolean => {
+  return (
+    Object.keys(JSON.parse(localStorage.getItem(key) || '{}')).length === 0
+  );
+};

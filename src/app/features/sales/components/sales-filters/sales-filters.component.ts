@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
 import { AppState } from '../../store/app.state';
 import { Store } from '@ngrx/store';
@@ -15,7 +15,7 @@ import {
   templateUrl: './sales-filters.component.html',
   styleUrl: './sales-filters.component.scss',
 })
-export class SalesFiltersComponent {
+export class SalesFiltersComponent implements OnInit {
   filterDatesFrecuency: FrecuencyDate[] = [
     FrecuencyDate.TODAY,
     FrecuencyDate.WEEKLY,
@@ -30,6 +30,17 @@ export class SalesFiltersComponent {
 
   buttonActiveIndex: number = 0;
   private store: Store<AppState> = inject(Store);
+
+  ngOnInit(): void {
+    this.store
+      .select((state: AppState) => state.sales.filterDate)
+      .subscribe((filterDate) => {
+        this.buttonActiveIndex =
+          this.filterDatesFrecuency.indexOf(filterDate.date) !== -1
+            ? this.filterDatesFrecuency.indexOf(filterDate.date)
+            : 0;
+      });
+  }
 
   changeFilterDate(index: number): void {
     this.buttonActiveIndex = index;

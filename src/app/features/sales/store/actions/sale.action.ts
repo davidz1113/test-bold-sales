@@ -23,3 +23,5 @@ export const setFilterSalesType = createAction(
   '[Sale] Set Filter Sales Type',
   props<{ filterSalesType: FilterSalesType }>()
 );
+
+export const loadFilters = createAction('[Sales List] Load Filters');

@@ -12,6 +12,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
 import { SaleEffect } from './features/sales/store/effects/sale.effect';
+import { LocalStorageEffect } from './features/sales/store/effects/localstorage.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'COP ' },
     provideStore(ROOT_REDUCERS),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects([SaleEffect]),
+    provideEffects([SaleEffect, LocalStorageEffect]),
     provideHttpClient(),
   ],
 };

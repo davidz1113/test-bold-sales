@@ -17,7 +17,6 @@ import {
   calculateFrecuencyLabel,
   getWeekDates,
 } from '../../../../shared/utils/dates.utils';
-import { SaleTypeEnum } from '../../../../core/models/saleType.enum';
 
 export const initialState: SaleState = {
   sales: [],
@@ -128,7 +127,6 @@ const filterSales = (
       });
     });
   }
-  console.log('filterSalesType', filterSalesType);
 
   newSales = newSales.filter((sale) => {
     if (filterSalesType.viewAll) {

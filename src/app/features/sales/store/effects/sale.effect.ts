@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SalesService } from '../../../../core/services/sales.service';
-import { catchError, map, mergeMap } from 'rxjs';
+import { catchError, map, mergeMap, switchMap } from 'rxjs';
+import { loadFilters, loadSalesSuccess } from '../actions/sale.action';
 
 @Injectable()
 export class SaleEffect {
@@ -13,12 +14,9 @@ export class SaleEffect {
   loadSales$ = createEffect(() =>
     this.action$.pipe(
       ofType('[Sale] Load Sales'),
-      mergeMap(() =>
+      switchMap(() =>
         this.salesService.getSales().pipe(
-          map((sales) => ({
-            type: '[Sale] Load Sales Success',
-            sales,
-          })),
+          switchMap((sales) => [loadSalesSuccess({ sales }), loadFilters()]),
           catchError(() => [])
         )
       )

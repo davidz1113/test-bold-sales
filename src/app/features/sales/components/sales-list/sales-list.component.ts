@@ -68,26 +68,24 @@ export class SalesListComponent implements OnInit {
 
   searchInputValue = signal<string>('');
 
-  constructor() {
-    effect(
-      () => {
-        const searchValue = this.searchInputValue();
-        this.store.dispatch(setSearchValue({ searchValue }));
-      },
-      {
-        allowSignalWrites: true,
-      }
-    );
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.sales$ = this.store.select(selectSales);
     this.labelFrecuency$ = this.store.select(selectLabelFrecuency);
+
+    this.store
+      .select((state: AppState) => state.sales)
+      .subscribe((state) => {
+        this.searchInputValue.set(state.filter);
+      });
   }
 
   onInputChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchInputValue.set(target.value);
+    const searchValue = this.searchInputValue();
+    this.store.dispatch(setSearchValue({ searchValue }));
   }
 
   onViewDetail(sale: ISale): void {

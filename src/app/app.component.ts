@@ -7,6 +7,9 @@ import { SalesDetailComponent } from './features/sales/components/sales-detail/s
 import { Store } from '@ngrx/store';
 import { AppState } from './features/sales/store/app.state';
 import { Observable } from 'rxjs';
+import { initialState } from './features/sales/store/reducers/sale.reducer';
+import { FilterDate } from './core/models/sale.state';
+import { isEmptyValueFromLocalStorage } from './shared/utils/utils.utils';
 
 @Component({
   selector: 'app-root',
@@ -30,5 +33,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isModalVisible$ = this.store.select(({ modal }) => modal.isVisible);
+    this.setDefaultLocalStorage();
+  }
+
+  setDefaultLocalStorage(): void {
+    if (isEmptyValueFromLocalStorage('filterDate')) {
+      const filterDate: FilterDate = initialState.filterDate;
+      localStorage.setItem('filterDate', JSON.stringify(filterDate));
+    }
+    if (isEmptyValueFromLocalStorage('filterSalesType')) {
+      const filterSalesType = initialState.filterSalesType;
+      localStorage.setItem('filterSalesType', JSON.stringify(filterSalesType));
+    }
+
+    if (isEmptyValueFromLocalStorage('searchValue')) {
+      localStorage.setItem('searchValue', JSON.stringify(''));
+    }
   }
 }
