@@ -10,6 +10,7 @@ import {
   loadSalesSuccess,
   setFilterDate,
   setFilterSalesType,
+  setOrderByAmount,
   setSearchValue,
 } from '../actions/sale.action';
 import { ISale } from '../../../../core/models/sale.interface';
@@ -33,6 +34,7 @@ export const initialState: SaleState = {
     paymentTerminal: true,
     viewAll: true,
   },
+  isOrderByAmountAsc: true,
 };
 
 export const saleReducer = createReducer(
@@ -49,7 +51,8 @@ export const saleReducer = createReducer(
       sales,
       state.filterDate,
       state.filter,
-      state.filterSalesType
+      state.filterSalesType,
+      state.isOrderByAmountAsc
     ),
     loading: false,
   })),
@@ -63,7 +66,8 @@ export const saleReducer = createReducer(
       state.sales,
       filterDate,
       state.filter,
-      state.filterSalesType
+      state.filterSalesType,
+      state.isOrderByAmountAsc
     ),
   })),
   on(setSearchValue, (state, { searchValue }) => ({
@@ -73,7 +77,8 @@ export const saleReducer = createReducer(
       state.sales,
       state.filterDate,
       searchValue,
-      state.filterSalesType
+      state.filterSalesType,
+      state.isOrderByAmountAsc
     ),
   })),
   on(setFilterSalesType, (state, { filterSalesType }) => ({
@@ -83,7 +88,19 @@ export const saleReducer = createReducer(
       state.sales,
       state.filterDate,
       state.filter,
-      filterSalesType
+      filterSalesType,
+      state.isOrderByAmountAsc
+    ),
+  })),
+  on(setOrderByAmount, (state, { isOrderByAmountAsc }) => ({
+    ...state,
+    isOrderByAmountAsc,
+    salesFiltered: filterSales(
+      state.sales,
+      state.filterDate,
+      state.filter,
+      state.filterSalesType,
+      isOrderByAmountAsc
     ),
   }))
 );
@@ -92,7 +109,8 @@ const filterSales = (
   originalSales: ReadonlyArray<ISale>,
   filterDate: FilterDate,
   filter: string,
-  filterSalesType: FilterSalesType
+  filterSalesType: FilterSalesType,
+  isOrderByAmountAsc: boolean
 ): ISale[] => {
   let newSales = originalSales.slice();
 
@@ -141,6 +159,12 @@ const filterSales = (
     }
     return true;
   });
+
+  if (isOrderByAmountAsc) {
+    newSales = newSales.sort((a, b) => a.amount - b.amount);
+  } else {
+    newSales = newSales.sort((a, b) => b.amount - a.amount);
+  }
 
   return newSales;
 };

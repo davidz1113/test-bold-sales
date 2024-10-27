@@ -7,6 +7,7 @@ export interface SaleState {
   filterSalesType: FilterSalesType;
   sales: ReadonlyArray<ISale>;
   salesFiltered: ISale[];
+  isOrderByAmountAsc: boolean;
 }
 
 export interface FilterDate {

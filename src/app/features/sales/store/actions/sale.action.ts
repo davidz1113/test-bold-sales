@@ -1,6 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { ISale } from '../../../../core/models/sale.interface';
-import { FilterDate, FilterSalesType } from '../../../../core/models/sale.state';
+import {
+  FilterDate,
+  FilterSalesType,
+} from '../../../../core/models/sale.state';
 
 export const loadSales = createAction('[Sale] Load Sales');
 
@@ -25,3 +28,8 @@ export const setFilterSalesType = createAction(
 );
 
 export const loadFilters = createAction('[Sales List] Load Filters');
+
+export const setOrderByAmount = createAction(
+  '[Sales List] Set Order By Amount',
+  props<{ isOrderByAmountAsc: boolean }>()
+);

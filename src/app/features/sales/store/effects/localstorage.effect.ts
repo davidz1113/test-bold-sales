@@ -5,9 +5,10 @@ import {
   loadSales,
   setFilterDate,
   setFilterSalesType,
+  setOrderByAmount,
   setSearchValue,
 } from '../actions/sale.action';
-import { map, switchMap, tap } from 'rxjs';
+import { map, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import {
@@ -24,24 +25,47 @@ export class LocalStorageEffect {
   saveFilters$ = createEffect(
     () =>
       this.action$.pipe(
-        ofType(loadSales, setFilterDate, setFilterSalesType, setSearchValue),
-        tap((action) => {
-          if (action.type === setFilterDate.type) {
-            localStorage.setItem(
-              'filterDate',
-              JSON.stringify(action.filterDate)
-            );
-          } else if (action.type === setFilterSalesType.type) {
-            localStorage.setItem(
-              'filterSalesType',
-              JSON.stringify(action.filterSalesType)
-            );
-          } else if (action.type === setSearchValue.type) {
-            localStorage.setItem(
-              'searchValue',
-              JSON.stringify(action.searchValue)
-            );
+        ofType(
+          setFilterDate,
+          setFilterSalesType,
+          setSearchValue,
+          setOrderByAmount
+        ),
+        tap((action: any) => {
+          const actionToLocalStorageKeyMap: { [key: string]: string } = {
+            [setFilterDate.type]: 'filterDate',
+            [setFilterSalesType.type]: 'filterSalesType',
+            [setSearchValue.type]: 'searchValue',
+            [setOrderByAmount.type]: 'isOrderByAmountAsc',
+          };
+
+          const key = actionToLocalStorageKeyMap[action.type];
+
+          if (key) {
+            localStorage.setItem(key, JSON.stringify(action[key]));
           }
+
+          // if (action.type === setFilterDate.type) {
+          //   localStorage.setItem(
+          //     'filterDate',
+          //     JSON.stringify(action.filterDate)
+          //   );
+          // } else if (action.type === setFilterSalesType.type) {
+          //   localStorage.setItem(
+          //     'filterSalesType',
+          //     JSON.stringify(action.filterSalesType)
+          //   );
+          // } else if (action.type === setSearchValue.type) {
+          //   localStorage.setItem(
+          //     'searchValue',
+          //     JSON.stringify(action.searchValue)
+          //   );
+          // } else if (action.type === setOrderByAmount.type) {
+          //   localStorage.setItem(
+          //     'isOrderByAmountAsc',
+          //     JSON.stringify(action.isOrderByAmountAsc)
+          //   );
+          // }
         })
       ),
     { dispatch: false }
@@ -62,9 +86,13 @@ export class LocalStorageEffect {
           ) as FilterSalesType;
 
           let searchValue: string = '';
+          let isOrderByAmountAsc: boolean = true;
 
           try {
             searchValue = JSON.parse(localStorage.getItem('searchValue') || '');
+            isOrderByAmountAsc = JSON.parse(
+              localStorage.getItem('isOrderByAmountAsc') || 'true'
+            );
           } catch (error) {
             searchValue = '';
           }
@@ -75,6 +103,7 @@ export class LocalStorageEffect {
             setFilterDate({ filterDate }),
             setFilterSalesType({ filterSalesType }),
             setSearchValue({ searchValue }),
+            setOrderByAmount({ isOrderByAmountAsc }),
           ];
         })
       ),

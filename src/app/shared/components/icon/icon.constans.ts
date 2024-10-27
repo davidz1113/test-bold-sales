@@ -12,4 +12,6 @@ export enum IconValues {
   DAVIPLATA = 'daviplata',
   PSE = 'pse',
   VISA = 'visa',
+  SORT_AMOUT_DOWN = 'sort-amount-down',
+  SORT_AMOUNT_UP = 'sort-amount-up',
 }

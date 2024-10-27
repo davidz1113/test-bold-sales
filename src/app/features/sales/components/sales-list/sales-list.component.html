@@ -25,7 +25,17 @@
           <th>Fecha y Hora</th>
           <th>Método de Pago</th>
           <th>ID Transacción</th>
-          <th>Monto</th>
+          <th
+            class="sales-list__table__row__mount__sort"
+            (click)="onSortByMount()"
+          >
+            <span>Monto</span>
+            <bold-icon
+              [height]="16"
+              [width]="16"
+              [name]="(isOrderAsc$ | async) ? 'SORT_AMOUT_DOWN' : 'SORT_AMOUNT_UP'"
+            />
+          </th>
         </tr>
       </thead>
       <tbody>
