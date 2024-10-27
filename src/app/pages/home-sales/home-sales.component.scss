@@ -36,5 +36,20 @@
       -webkit-text-clip: text;
       font-weight: 600;
     }
+
+    &__frecuency {
+      font-size: $primary-font-size;
+      color: $dark-grey-color;
+      text-align: center;
+
+      @include xs {
+        font-size: $secondary-font-size;
+      }
+
+      @include sm {
+        font-size: $secondary-font-size;
+      }
+
+    }
   }
 }

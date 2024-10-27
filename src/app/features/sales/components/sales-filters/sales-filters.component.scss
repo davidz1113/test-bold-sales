@@ -1,4 +1,5 @@
 @import "../../../../../assets/styles/variables.scss";
+@import "../../../../../assets/styles/mixin-responsive.scss";
 
 .sales-filter {
   &__wrapper {
@@ -13,6 +14,10 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     gap: 1rem;
+
+    @include xs {
+      flex-wrap: wrap;
+    }
   }
 
   &__button {
