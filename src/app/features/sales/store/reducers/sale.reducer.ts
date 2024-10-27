@@ -29,8 +29,8 @@ export const initialState: SaleState = {
     frecuencyLabel: calculateFrecuencyLabel(FrecuencyDate.TODAY),
   },
   filterSalesType: {
-    paymentLink: false,
-    paymentTerminal: false,
+    paymentLink: true,
+    paymentTerminal: true,
     viewAll: true,
   },
 };

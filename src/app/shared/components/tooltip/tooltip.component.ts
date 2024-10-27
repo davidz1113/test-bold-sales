@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,7 @@ import { setFilterSalesType } from '../../../features/sales/store/actions/sale.a
   templateUrl: './tooltip.component.html',
   styleUrl: './tooltip.component.scss',
 })
-export class TooltipComponent {
+export class TooltipComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
   private store: Store<AppState> = inject(Store);
 
@@ -21,10 +21,33 @@ export class TooltipComponent {
 
   constructor() {
     this.checkBoxForm = this.fb.group({
-      paymentLink: [],
-      paymentTerminal: [],
-      viewAll: [],
+      paymentLink: [true],
+      paymentTerminal: [true],
+      viewAll: [true],
     });
+  }
+
+  ngOnInit(): void {
+    this.checkBoxForm.get('viewAll')?.valueChanges.subscribe({
+      next: (value) => {
+        this.checkBoxForm.patchValue(
+          { paymentLink: value, paymentTerminal: value },
+          { emitEvent: false }
+        );
+      },
+    });
+
+    this.checkBoxForm.valueChanges.subscribe((values) => {
+      const { paymentLink, paymentTerminal } = values;
+      const viewAll = paymentLink && paymentTerminal;
+      this.checkBoxForm.patchValue({ viewAll }, { emitEvent: false });
+    });
+
+    this.store
+      .select((state: AppState) => state.sales.filterSalesType)
+      .subscribe((filterSalesType) =>
+        this.checkBoxForm.patchValue(filterSalesType, { emitEvent: false })
+      );
   }
 
   showTooltip(elementRef: HTMLElement): void {
