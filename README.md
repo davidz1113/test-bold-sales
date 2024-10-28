@@ -1,27 +1,77 @@
 # AngularBoldTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.5.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 17.0.5.
 
-## Development server
+## Tecnologías Utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular**: Framework principal para el desarrollo de la aplicación.
+- **TypeScript**: Lenguaje de programación utilizado.
+- **SCSS**: Preprocesador CSS para estilos.
+- **Karma**: Herramienta de pruebas unitarias.
+- **Jest**: Framework de pruebas unitarias. (se cambio Jasmine por Jest)
+- **NgRx**: Manejo del estado de la aplicación.
+- **Conventional Commits**: Convenciones para mensajes de commit.
 
-## Code scaffolding
+## Funcionalidades Adicionales
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Skeletons**: Implementación de skeletons para mejorar la experiencia de usuario durante la carga de datos.
+- **Paginación**: La aplicación incluye paginación para manejar grandes conjuntos de datos.
+- **Filtros**: Filtros avanzados para buscar y filtrar datos.
+- **Filtrar por monto**: Se puede filtrar por monto de manera Ascendete y Descendente.
+- **Persistencia en Local Storage**: Los filtros se persisten en el local storage para mantener el estado cuando se recarga la página.
+- **Pruebas unitarias con Jest**: Se realizan algunas pruebas unitarias.
 
-## Build
+## Servidor de Desarrollo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Ejecuta `ng serve` para un servidor de desarrollo. Navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambias cualquiera de los archivos fuente.
 
-## Running unit tests
+## Servidor de Producción
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+El proyecto fue desplegado en la nube con Vercel: https://bold-sales-alpha.vercel.app/home-sales
 
-## Running end-to-end tests
+Vista previa de la aplicación
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![captura](https://raw.githubusercontent.com/davidz1113/test-bold-sales/master/src/assets/screenshoots/home-page.png)
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Construcción
+
+Ejecuta `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`.
+
+## Ejecución de Pruebas Unitarias
+
+Ejecuta `ng test` para ejecutar las pruebas unitarias a través de Jest.
+
+Ejecucion de pruebas unitarias:
+
+![captura](https://raw.githubusercontent.com/davidz1113/test-bold-sales/master/src/assets/screenshoots/coverage.png)
+
+
+## Commits Convencionales
+
+Este proyecto sigue las convenciones de [Conventional Commits](https://www.conventionalcommits.org/) para mensajes de commit.
+
+## Estructura de Carpetas
+
+La estructura de carpetas sigue el estandar de arquitectura hexagonal
+
+```plaintext
+src/
+├── app/
+│   ├── core/
+│   │   ├── services/
+│   │   └── models/
+│   ├── features/
+│   │   ├── sales/
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   └── store/
+│   ├── shared/
+│   │   ├── components/
+│   │   └── utils/
+│   └── app.module.ts
+├── assets/
+│   ├── images/
+│   └── styles/
+├── environments/
+└── index.html
