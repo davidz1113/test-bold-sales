@@ -26,7 +26,6 @@ import { isEmptyValueFromLocalStorage } from './shared/utils/utils.utils';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-
   private store: Store<AppState> = inject(Store);
   isModalVisible$: Observable<boolean> = new Observable<boolean>();
 
@@ -51,6 +50,11 @@ export class AppComponent implements OnInit {
 
     if (isEmptyValueFromLocalStorage('isOrderByAmountAsc') == null) {
       localStorage.setItem('isOrderByAmountAsc', JSON.stringify(true));
+    }
+
+    if (isEmptyValueFromLocalStorage('pageOptions')) {
+      const pageOptions = initialState.pageOptions;
+      localStorage.setItem('pageOptions', JSON.stringify(pageOptions));
     }
   }
 }

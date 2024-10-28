@@ -22,11 +22,12 @@ import {
   setSearchValue,
 } from '../../store/actions/sale.action';
 import { openModal } from '../../store/actions/modal.action';
+import { SalesListPaginationComponent } from "../sales-list-pagination/sales-list-pagination.component";
 
 @Component({
   selector: 'bold-sales-list',
   standalone: true,
-  imports: [DatePipe, AsyncPipe, CustomCurrencyPipe, IconComponent],
+  imports: [DatePipe, AsyncPipe, CustomCurrencyPipe, IconComponent, SalesListPaginationComponent],
   templateUrl: './sales-list.component.html',
   styleUrl: './sales-list.component.scss',
 })

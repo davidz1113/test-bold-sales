@@ -18,3 +18,13 @@ export const isEmptyValueFromLocalStorage = (key: string): boolean | null => {
     Object.keys(JSON.parse(localStorage.getItem(key) || '{}')).length === 0
   );
 };
+
+export const calculateTotalPages = (sales: any[], pageSize: string): number => {
+  // console.log(sales);
+  
+  if (pageSize === 'Todos') {
+    return 1;
+  }
+  // console.log(Math.ceil(sales.length / parseInt(pageSize)));
+  return Math.ceil(sales.length / parseInt(pageSize));
+};

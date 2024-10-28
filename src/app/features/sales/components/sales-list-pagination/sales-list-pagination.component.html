@@ -1,0 +1,31 @@
+<section class="pagination">
+  <select [formControl]="selectZiseForm" class="pagination__page-size">
+    @for (pageSize of pageSizeList; track $index) {
+    <option [value]="pageSize">{{ pageSize }}</option>
+    }
+  </select>
+
+  <p class="pagination__text">
+    Pag. {{ currentPage }} de {{ (pageLength$ | async).totalPages }}
+  </p>
+
+  <ul class="pagination__list">
+    <li
+      class="pagination__list__item"
+      [class.pagination__list__item--disabled]="currentPage === 1"
+      (click)="previousPage()"
+    >
+      <p>Anterior</p>
+    </li>
+
+    <li
+      [class.pagination__list__item--disabled]="
+        currentPage == (pageLength$ | async).totalPages
+      "
+      class="pagination__list__item"
+      (click)="nextPage()"
+    >
+      <p>Siguiente</p>
+    </li>
+  </ul>
+</section>
