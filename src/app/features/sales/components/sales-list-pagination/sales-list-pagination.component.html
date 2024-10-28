@@ -1,4 +1,17 @@
 <section class="pagination">
+  @if (loadSales$ |async) {
+  <div>
+    <bold-skeleton-square classT="justify-self-start" height="40" width="20" />
+  </div>
+  <div class="w-100">
+    <bold-skeleton-square classT="justify-self-start" height="40" width="20" />
+  </div>
+  <div class="w-100">
+    <bold-skeleton-square classT="justify-self-end" height="40" width="20" />
+  </div>
+
+  }@else {
+
   <select [formControl]="selectZiseForm" class="pagination__page-size">
     @for (pageSize of pageSizeList; track $index) {
     <option [value]="pageSize">{{ pageSize }}</option>
@@ -28,4 +41,5 @@
       <p>Siguiente</p>
     </li>
   </ul>
+  }
 </section>

@@ -1,4 +1,10 @@
 <div class="tooltip-container">
+  @if (loadSales$ |async) {
+  <div class="w-100">
+    <bold-skeleton-square classT="justify-self-end" height="40" width="20" />
+  </div>
+
+  }@else {
   <button
     class="tooltip-container__button-filter"
     (click)="showTooltip(tooltipContainer)"
@@ -6,6 +12,7 @@
     <p>Filtrar</p>
     <bold-icon name="FILTER" [height]="16" [width]="16"></bold-icon>
   </button>
+  }
   <div class="tooltip-container__wrapper" #tooltipContainer>
     <!-- [ngClass]="
        showTooltip

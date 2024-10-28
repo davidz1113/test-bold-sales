@@ -7,10 +7,26 @@
       >
         <div class="home-sales__card__wrapper">
           <p class="home-sales__card__amount">
-            $ {{ totalAmount$ | async | customCurrency : "" : "" : "1.0-0" }}
+            @if (loadSales$ |async) {
+            <bold-skeleton-square
+              classT="justify-self-center"
+              height="30"
+              width="40"
+            />
+            }@else { $
+            {{ totalAmount$ | async | customCurrency : "" : "" : "1.0-0" }}
+            }
           </p>
           <p class="home-sales__card__frecuency">
+            @if (loadSales$ |async) {
+            <bold-skeleton-square
+              classT="justify-self-center"
+              height="20"
+              width="80"
+            />
+            }@else {
             {{ labelFrecuencyDate$ | async }}
+            }
           </p>
         </div>
       </bold-card>

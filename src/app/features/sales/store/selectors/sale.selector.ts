@@ -13,6 +13,11 @@ export const selectSalesFiltered = createSelector(
   (state) => state.salesFiltered
 );
 
+export const selectLoadingSales = createSelector(
+  selectSalesFeature,
+  (state) => state.loading
+);
+
 export const selectLabelFrecuency = createSelector(
   selectSalesFeature,
   (state) => state.filterDate.textLabel
@@ -30,7 +35,10 @@ export const selectTotalAmout = createSelector(selectSalesFeature, (state) =>
 export const selectTotalPages = createSelector(
   selectSalesFeature,
   // (state)=> state.pageOptions.totalPages
-  (state) => ({totalPages: state.pageOptions.totalPages, currentPage: state.pageOptions.page})
+  (state) => ({
+    totalPages: state.pageOptions.totalPages,
+    currentPage: state.pageOptions.page,
+  })
 );
 
 export const selectPageOptions = createSelector(
