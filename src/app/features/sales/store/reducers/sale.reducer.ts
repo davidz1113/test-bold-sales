@@ -20,6 +20,7 @@ import { ISale } from '../../../../core/models/sale.interface';
 import {
   calculateFrecuencyLabel,
   getWeekDates,
+  normalizeDate,
 } from '../../../../shared/utils/dates.utils';
 import { calculateTotalPages } from '../../../../shared/utils/utils.utils';
 
@@ -159,13 +160,13 @@ const filterSales = (
   } else if (filterDate.date === FrecuencyDate.WEEKLY) {
     const { startDate, endDate } = getWeekDates(new Date());
     newSales = newSales.filter((sale) => {
-      const saleDate = new Date(sale.createdAt).getTime();
+      const saleDate = normalizeDate(new Date(sale.createdAt)).getTime();
       return saleDate >= startDate && saleDate <= endDate;
     });
   } else if (filterDate.date === FrecuencyDate.MONTHLY) {
-    const dateToFilter = new Date().getMonth();
+    const dateToFilter = normalizeDate(new Date()).getMonth();
     newSales = newSales.filter((sale) => {
-      const month = new Date(sale.createdAt).getMonth();
+      const month = normalizeDate(new Date(sale.createdAt)).getMonth();
       return month === dateToFilter;
     });
   }

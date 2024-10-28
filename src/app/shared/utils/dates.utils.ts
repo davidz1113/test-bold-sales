@@ -40,7 +40,7 @@ const formatDateToLongString = (date: Date): string => {
 
 export const getWeekDates = (date: Date) => {
   const dayOfWeek = date.getDay(); // 0 (Domingo) a 6 (Sábado)
-  const startDate = new Date(date);
+  const startDate = normalizeDate(new Date(date));
 
   if (dayOfWeek === 0) {
     startDate.setDate(date.getDate() - dayOfWeek - 6); // Moverse al Lunes de la semana pasada
@@ -48,11 +48,17 @@ export const getWeekDates = (date: Date) => {
     startDate.setDate(date.getDate() - dayOfWeek + 1); // Moverse al Lunes de la semana actual
   }
 
-  const endDate = new Date(startDate);
+  const endDate = normalizeDate(new Date(startDate));
   endDate.setDate(startDate.getDate() + 6); // Moverse al domingo de la semana actual
 
   return {
     startDate: startDate.getTime(),
     endDate: endDate.getTime(),
   };
+};
+
+export const normalizeDate = (date: Date) => {
+  const normalizedDate = new Date(date);
+  normalizedDate.setHours(0, 0, 0, 0);
+  return normalizedDate;
 };
