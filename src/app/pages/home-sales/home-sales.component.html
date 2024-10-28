@@ -1,12 +1,17 @@
 <div class="home-sales__container">
   <section class="home-sales__wrapper">
     <div class="home-sales__card">
-      <bold-card [title]="'Total de ventas de ' + (labelFrecuency$ | async)">
+      <bold-card
+        [title]="'Total de ventas de ' + (labelFrecuency$ | async)"
+        [tooltipText]="'Este es el total de las ventas filtradas'"
+      >
         <div class="home-sales__card__wrapper">
           <p class="home-sales__card__amount">
             $ {{ totalAmount$ | async | customCurrency : "" : "" : "1.0-0" }}
           </p>
-          <p class="home-sales__card__frecuency">{{ labelFrecuencyDate$ | async }}</p>
+          <p class="home-sales__card__frecuency">
+            {{ labelFrecuencyDate$ | async }}
+          </p>
         </div>
       </bold-card>
     </div>

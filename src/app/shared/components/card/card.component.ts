@@ -10,4 +10,5 @@ import { Component, Input } from '@angular/core';
 export class CardComponent {
   @Input() title: string = 'Default Title';
   @Input() icon: string = 'info-icon';
+  @Input() tooltipText?: string = 'Default Description';
 }

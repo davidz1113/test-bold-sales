@@ -1,14 +1,11 @@
 @import "../../../../assets/styles/variables.scss";
 
-
 .card {
   display: flex;
   flex-direction: column;
   border-radius: $border-radius;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   transition: all 0.3s;
-  cursor: pointer;
   background-color: $white-color;
 
   &__header {
@@ -20,5 +17,43 @@
     justify-content: space-between;
     align-items: center;
     font-size: $secondary-font-size;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+
+    &__text {
+      visibility: hidden; 
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 901;
+      opacity: 0;
+      bottom: 80%; 
+      left: 50%;
+      transform: translateX(-50%);
+      transition: opacity 0.3s;
+
+      /* Flecha del tooltip */
+      &::after {
+        content: "";
+        position: absolute;
+        top: 100%; 
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+    }
+
+    &:hover .tooltip__text {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
