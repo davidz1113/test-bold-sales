@@ -6,6 +6,7 @@ import {
   setFilterDate,
   setFilterSalesType,
   setOrderByAmount,
+  setPageOptions,
   setSearchValue,
 } from '../actions/sale.action';
 import { map, switchMap, tap, withLatestFrom } from 'rxjs';
@@ -14,6 +15,7 @@ import { AppState } from '../app.state';
 import {
   FilterDate,
   FilterSalesType,
+  PageOptions,
 } from '../../../../core/models/sale.state';
 import { initialState } from '../reducers/sale.reducer';
 
@@ -29,7 +31,8 @@ export class LocalStorageEffect {
           setFilterDate,
           setFilterSalesType,
           setSearchValue,
-          setOrderByAmount
+          setOrderByAmount,
+          setPageOptions
         ),
         tap((action: any) => {
           const actionToLocalStorageKeyMap: { [key: string]: string } = {
@@ -37,6 +40,7 @@ export class LocalStorageEffect {
             [setFilterSalesType.type]: 'filterSalesType',
             [setSearchValue.type]: 'searchValue',
             [setOrderByAmount.type]: 'isOrderByAmountAsc',
+            [setPageOptions.type]: 'pageOptions',
           };
 
           const key = actionToLocalStorageKeyMap[action.type];
@@ -75,7 +79,12 @@ export class LocalStorageEffect {
             searchValue = '';
           }
 
+          const pageOptions: PageOptions = JSON.parse(
+            localStorage.getItem('pageOptions') || '{}'
+          ) as PageOptions;
+
           return [
+            setPageOptions({ pageOptions }),
             setFilterDate({ filterDate }),
             setFilterSalesType({ filterSalesType }),
             setSearchValue({ searchValue }),

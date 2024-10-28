@@ -5,15 +5,23 @@ export interface SaleState {
   filter: string;
   filterDate: FilterDate;
   filterSalesType: FilterSalesType;
-  sales: ReadonlyArray<ISale>;
+  sales: ISale[];
   salesFiltered: ISale[];
+  salesPaginated: ISale[];
   isOrderByAmountAsc: boolean;
+  pageOptions: PageOptions;
 }
 
 export interface FilterDate {
   date: FrecuencyDate;
   textLabel?: string;
   frecuencyLabel?: string;
+}
+
+export interface PageOptions {
+  size: string;
+  page: number;
+  totalPages?: number;
 }
 
 export interface FilterSalesType {

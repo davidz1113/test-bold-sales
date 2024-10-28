@@ -3,6 +3,7 @@ import {
   FilterDate,
   FilterSalesType,
   FrecuencyDate,
+  PageOptions,
   SaleState,
 } from '../../../../core/models/sale.state';
 import {
@@ -11,18 +12,27 @@ import {
   setFilterDate,
   setFilterSalesType,
   setOrderByAmount,
+  setPageOptions,
   setSearchValue,
+  updateSalesPaginated,
 } from '../actions/sale.action';
 import { ISale } from '../../../../core/models/sale.interface';
 import {
   calculateFrecuencyLabel,
   getWeekDates,
 } from '../../../../shared/utils/dates.utils';
+import { calculateTotalPages } from '../../../../shared/utils/utils.utils';
 
 export const initialState: SaleState = {
   sales: [],
   salesFiltered: [],
   loading: false,
+  pageOptions: {
+    size: '10',
+    page: 1,
+    totalPages: 0,
+  },
+  salesPaginated: [],
   filter: '',
   filterDate: {
     date: FrecuencyDate.TODAY,
@@ -61,6 +71,10 @@ export const saleReducer = createReducer(
     filterDate: {
       ...filterDate,
       frecuencyLabel: calculateFrecuencyLabel(filterDate.date),
+    },
+    pageOptions: {
+      ...state.pageOptions,
+      page: 1,
     },
     salesFiltered: filterSales(
       state.sales,
@@ -101,6 +115,28 @@ export const saleReducer = createReducer(
       state.filter,
       state.filterSalesType,
       isOrderByAmountAsc
+    ),
+  })),
+  on(setPageOptions, (state, { pageOptions }) => ({
+    ...state,
+    pageOptions: {
+      ...pageOptions,
+      totalPages: calculateTotalPages(state.salesFiltered, pageOptions.size),
+    },
+    salesFiltered: filterSales(
+      state.sales,
+      state.filterDate,
+      state.filter,
+      state.filterSalesType,
+      state.isOrderByAmountAsc
+    ),
+    salesPaginated: filterSalesPaginated(state.salesFiltered, pageOptions),
+  })),
+  on(updateSalesPaginated, (state) => ({
+    ...state,
+    salesPaginated: filterSalesPaginated(
+      state.salesFiltered,
+      state.pageOptions
     ),
   }))
 );
@@ -166,5 +202,25 @@ const filterSales = (
     newSales = newSales.sort((a, b) => b.amount - a.amount);
   }
 
+  // newSales = newSales.slice(
+  //   (pageOptions.page - 1) * pageOptions.size,
+  //   pageOptions.page * pageOptions.size
+  // );
+
   return newSales;
+};
+
+const filterSalesPaginated = (sales: ISale[], pageOptions: PageOptions) => {
+  let newSales = sales.slice();
+  if (pageOptions.size === 'Todos') {
+    return newSales;
+  }
+
+  const pageSize = parseInt(pageOptions.size);
+  const startIndex = (pageOptions.page - 1) * pageSize;
+  const endIndex = pageOptions.page * pageSize;
+
+  return newSales.slice(startIndex, endIndex);
+
+  // return newSales.slice(0, parseInt(pageOptions.size));
 };

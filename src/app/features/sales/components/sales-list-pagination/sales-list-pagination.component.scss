@@ -1,0 +1,49 @@
+@import "../../../../../assets/styles/variables.scss";
+
+.pagination {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  &__list {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: end;
+
+    &__item {
+      font-size: $secondary-font-size;
+      cursor: pointer;
+      padding: 1rem;
+      border-radius: $border-radius;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: $light-grey-color;
+      }
+
+      &--disabled {
+        cursor: not-allowed;
+        color: #ccc;
+        border-color: #ccc;
+      }
+    }
+  }
+
+  &__text {
+    font-size: $secondary-font-size;
+    padding: 1rem;
+    width: 100%;
+    min-width: 150px;
+  }
+
+  &__page-size {
+    font-size: $secondary-font-size;
+    padding: 1rem;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius;
+  }
+}
