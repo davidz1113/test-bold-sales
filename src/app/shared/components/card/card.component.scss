@@ -7,6 +7,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
   background-color: $white-color;
+  overflow: hidden;
 
   &__header {
     max-height: 3rem;
@@ -18,12 +19,13 @@
     align-items: center;
     font-size: $secondary-font-size;
   }
+  
   .tooltip {
     position: relative;
     display: inline-block;
 
     &__text {
-      visibility: hidden; 
+      visibility: hidden;
       width: 200px;
       background-color: #555;
       color: #fff;
@@ -33,8 +35,8 @@
       position: absolute;
       z-index: 901;
       opacity: 0;
-      bottom: 80%; 
-      left: 50%;
+      bottom: 30%;
+      left: 30%;
       transform: translateX(-50%);
       transition: opacity 0.3s;
 
@@ -42,7 +44,7 @@
       &::after {
         content: "";
         position: absolute;
-        top: 100%; 
+        top: 100%;
         left: 50%;
         transform: translateX(-50%);
         border-width: 5px;

@@ -5,15 +5,17 @@ import { Store } from '@ngrx/store';
 import { setPageOptions } from '../../store/actions/sale.action';
 import { Observable } from 'rxjs';
 import {
+  selectLoadingSales,
   selectPageOptions,
   selectTotalPages,
 } from '../../store/selectors/sale.selector';
 import { AsyncPipe } from '@angular/common';
+import { SkeletonSquareComponent } from "../../../../shared/components/skeletons/skeleton-square/skeleton-square.component";
 
 @Component({
   selector: 'bold-sales-list-pagination',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, AsyncPipe],
+  imports: [FormsModule, ReactiveFormsModule, AsyncPipe, SkeletonSquareComponent],
   templateUrl: './sales-list-pagination.component.html',
   styleUrl: './sales-list-pagination.component.scss',
 })
@@ -29,6 +31,7 @@ export class SalesListPaginationComponent implements OnInit {
   >();
   currentPage: number = 1;
   totalPages: number = 0;
+  loadSales$: Observable<boolean> = new Observable<boolean>();
 
   ngOnInit(): void {
     this.selectZiseForm.valueChanges.subscribe((value) => {
@@ -44,6 +47,7 @@ export class SalesListPaginationComponent implements OnInit {
         this.currentPage = page;
         this.selectZiseForm.setValue(size, { emitEvent: false });
       });
+    this.loadSales$ = this.store.select(selectLoadingSales);
   }
 
   nextPage(): void {
